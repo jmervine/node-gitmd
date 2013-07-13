@@ -21,8 +21,11 @@ http.createServer(function (req, res) {
         res.writeHead(200, { 'Content-Type': 'text/html' });
         res.end(head+mdown+foot+'\n');
     });
-}).listen(8000);
+}).listen(8009);
 
-console.log('functional_app.js starting on 8000');
-process.send({app:'connect'});
+try {
+    process.send({app:'connect'});
+} catch(e) {
+    console.log('functional_app.js starting on 8009');
+}
 

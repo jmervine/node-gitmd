@@ -11,10 +11,10 @@ server.on('message', function () {
     var data;
     console.log(" ");
     console.log("200 condition");
-    console.log("loading: http://localhost:8000/README");
+    console.log("loading: http://localhost:8009/README");
     console.log("   from: http://raw.github.com/jmervine/node-gitmd/master/README.md");
     console.log(" ");
-    http.get("http://localhost:8000/README", function (res) {
+    http.get("http://localhost:8009/README", function (res) {
         res.setEncoding('utf8');
         res.on('data', function (chunk) {
             data += chunk;
@@ -37,10 +37,10 @@ server.on('message', function () {
 
     console.log(" ");
     console.log("404 condition");
-    console.log("loading: http://localhost:8000/FILE_THAT_DOES_NOT_EXIST");
+    console.log("loading: http://localhost:8009/FILE_THAT_DOES_NOT_EXIST");
     console.log("   from: http://raw.github.com/jmervine/node-gitmd/master/FILE_THAT_DOES_NOT_EXIST.md");
     console.log(" ");
-    http.get("http://localhost:8000/FILE_THAT_DOES_NOT_EXIST", function (res) {
+    http.get("http://localhost:8009/FILE_THAT_DOES_NOT_EXIST", function (res) {
         res.on('data', function (chunk) {
             if (res.statusCode === 404) {
                 stat.push(true);
@@ -84,7 +84,7 @@ function finish () {
 }
 
 function pass() {
-    console.log("load successful");
+    console.log("functional tests successful");
     process.exit(0);
 }
 

@@ -4,4 +4,8 @@ http.createServer(function (req, res) {
     res.end('# Hello Test!\n');
 }).listen(8008);
 
-process.send({app:'connect'});
+try {
+    process.send({app:'connect'});
+} catch(e) {
+    console.log('app.js starting on 8002');
+}
