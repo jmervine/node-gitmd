@@ -46,10 +46,12 @@ GitMD.prototype = {
         http.get(this.gitpath(path), function (res) {
            res.setEncoding('utf8');
            res.on('data', function (chunk) {
+               if (res.statusCode !== 200) {
+                   callback({ statusCode: res.statusCode, url: res.url }, null, null);
+               }
                mdown += chunk;
            });
            res.on('error', function (error) {
-               res.end();
                callback(error, null, null);
            });
            return res.on('end', function () {

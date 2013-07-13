@@ -22,8 +22,7 @@
     "url": "https://github.com/jmervine/node-gitmd/issues"
   },
   "devDependencies": {
-    "nodeunit": "~0.8.1",
-    "express": "~3.3.4"
+    "nodeunit": "~0.8.1"
   },
   "dependencies": {
     "node-markdown": "~0.1.1"

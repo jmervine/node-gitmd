@@ -40,8 +40,8 @@ server.on('message', function () {
     console.log("loading: http://localhost:8000/FILE_THAT_DOES_NOT_EXIST");
     console.log("   from: http://raw.github.com/jmervine/node-gitmd/master/FILE_THAT_DOES_NOT_EXIST.md");
     console.log(" ");
-    http.get("http://localhost:8000/README", function (res) {
-        res.on('data', function (error) {
+    http.get("http://localhost:8000/FILE_THAT_DOES_NOT_EXIST", function (res) {
+        res.on('data', function (chunk) {
             if (res.statusCode === 404) {
                 stat.push(true);
             } else {
@@ -49,7 +49,7 @@ server.on('message', function () {
             }
         });
         res.on('error', function (error) {
-            stat.push(error);
+            //stat.push(error);
         });
         res.on('end', function () {
             ran++;

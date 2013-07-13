@@ -5,32 +5,24 @@ var gdown = new GitMD({
     project: 'node-gitmd'
 });
 
-var app = require('express')();
+var http = require('http');
 
-var head = "<html><body>";
-var foot = "</body></html>";
+var head = '<html><body>';
+var foot = '</body></html>';
 
-app.get('/pass', function (req, res) {
-    gdown.fetch('/README', function (err, mdown, bm) {
-        foot += "<!-- benchmark " + bm + " -->";
-        if (err) {
-            res.send("ERROR: " + error, 500);
+var http = require('http');
+http.createServer(function (req, res) {
+    gdown.fetch(req.url, function (err, mdown, bm) {
+        foot += '<!-- benchmark ' + bm + ' -->';
+        if (err !== null) {
+            res.writeHead(err.statusCode, { 'Content-Type': 'text/html' });
+            res.end('GitMD couldn\'t find: ' + err.url + '\n');
         }
-        res.send(head+mdown+foot);
+        res.writeHead(200, { 'Content-Type': 'text/html' });
+        res.end(head+mdown+foot+'\n');
     });
-});
+}).listen(8000);
 
-app.get('/fail', function (req, res) {
-    gdown.fetch('/BADFILE', function (err, mdown, bm) {
-        foot += "<!-- benchmark " + bm + " -->";
-        if (err) {
-            res.send("ERROR: " + error, 500);
-        }
-        res.send(head+mdown+foot);
-    });
-});
-
-app.listen(8000);
 console.log('functional_app.js starting on 8000');
 process.send({app:'connect'});
 

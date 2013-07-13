@@ -2,6 +2,11 @@
 
 Get and parse markdown from github.
 
+Tests status is: [![Build Status](https://travis-ci.org/jmervine/node-gitmd.png?branch=master)](https://travis-ci.org/jmervine/node-gitmd)
+On:
+- 0.8
+- 0.10
+
 ## Install
 
 > Node: still under development, going to publish an npm once complete and in
@@ -26,24 +31,22 @@ Get and parse markdown from github.
         //root: 'content/pages',  // default is ''
     });
 
-    var app     = require('express').express();
+    var http = require('http');
 
-    var head = "<html><body>";
-    var foot = "</body></html>";
+    var head = '<html><body>';
+    var foot = '</body></html>';
 
-    // Hit 'http://localhost:8000/README' with the
-    // above configuration
-    app.get(/^(.*)$/, function (req, res) {
-        gdown.fetch(req.path, function (err, mdown, bm) {
-            foot += "<!-- benchmark " + bm + " -->";
-            if (!error) {
-                res.send(head+mdown+foot);
-            } else {
-                res.send("ERROR: " + error, 500);
+    var http = require('http');
+    http.createServer(function (req, res) {
+        gdown.fetch(req.url, function (err, mdown, bm) {
+            foot += '<!-- benchmark ' + bm + ' -->';
+            if (err !== null) {
+                res.writeHead(err.statusCode, { 'Content-Type': 'text/html' });
+                res.end('GitMD couldn\'t find: ' + err.url + '\n');
             }
+            res.writeHead(200, { 'Content-Type': 'text/html' });
+            res.end(head+mdown+foot+'\n');
         });
-    });
-
-    app.listen(8000);
+    }).listen(8000);
     console.log('starting on 8000');
 
