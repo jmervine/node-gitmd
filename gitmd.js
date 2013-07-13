@@ -50,14 +50,14 @@ GitMD.prototype = {
            });
            res.on('error', function (error) {
                res.end();
-               callback(error);
+               callback(error, null, null);
            });
            return res.on('end', function () {
                var bm = mark();
-               callback(Markdown(mdown), bm);
+               callback(null, Markdown(mdown), bm);
            });
         }).on('error', function (error) {
-           callback(error);
+           callback(error, null, null);
         });
     }
 };

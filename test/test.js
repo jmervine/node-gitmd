@@ -80,11 +80,11 @@ module.exports = {
     },
 
     '#fetch(path, callback)': function (test) {
-        test.expect(2);
+        test.expect(4);
 
         // stub gitpath
         GitMD.prototype.gitpath = function () {
-            return "http://localhost:8000";
+            return "http://localhost:8008";
         };
 
         gmd = new GitMD(config.stub);
@@ -93,8 +93,11 @@ module.exports = {
         server = fork('./test/support/app');
 
         server.on('message', function () {
-            gmd.fetch(path, function (res) {
+            gmd.fetch(path, function (err, res, bm) {
                 test.ok(res);
+                test.ok(!err);
+                test.ok(bm);
+
                 test.ok(res.indexOf('<h1>Hello Test!</h1>') !== -1);
                 try { server.kill(); } catch (e) {}
                 test.done();

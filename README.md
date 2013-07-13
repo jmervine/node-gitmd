@@ -31,10 +31,16 @@ Get and parse markdown from github.
     var head = "<html><body>";
     var foot = "</body></html>";
 
-    // try: '/README' with the above configuration
+    // Hit 'http://localhost:8000/README' with the
+    // above configuration
     app.get(/^(.*)$/, function (req, res) {
-        gdown.fetch(req.path, function (mdown) {
-            res.send(head+mdown+foot);
+        gdown.fetch(req.path, function (err, mdown, bm) {
+            foot += "<!-- benchmark " + bm + " -->";
+            if (!error) {
+                res.send(head+mdown+foot);
+            } else {
+                res.send("ERROR: " + error, 500);
+            }
         });
     });
 
