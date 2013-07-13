@@ -98,7 +98,7 @@ module.exports = {
                 test.ok(!err);
                 test.ok(bm);
 
-                test.ok(res.indexOf('<h1>Hello Test!</h1>') !== -1);
+                test.ok(res.toString().indexOf('<h1>Hello Test!</h1>') !== -1);
                 try { server.kill(); } catch (e) {}
                 test.done();
             });
