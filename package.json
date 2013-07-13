@@ -1,0 +1,31 @@
+{
+  "name": "gitmd",
+  "version": "0.0.0",
+  "description": "GitMD is a simple module to fetch markdown on git, parse and return it.",
+  "main": "gitmd.js",
+  "scripts": {
+    "test": "make test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com/jmervine/node-gitmd.git"
+  },
+  "keywords": [
+    "git",
+    "markdown",
+    "http",
+    "parser"
+  ],
+  "author": "Joshua P. Mervine <joshua@mervine.net> (http://mervine.net)",
+  "license": "BSD",
+  "bugs": {
+    "url": "https://github.com/jmervine/node-gitmd/issues"
+  },
+  "devDependencies": {
+    "nodeunit": "~0.8.1",
+    "express": "~3.3.4"
+  },
+  "dependencies": {
+    "node-markdown": "~0.1.1"
+  }
+}
