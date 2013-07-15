@@ -38,14 +38,14 @@ On:
 
     var http = require('http');
     http.createServer(function (req, res) {
-        gdown.fetch(req.url, function (err, mdown, bm) {
+        gdown.fetch(req.url, function (err, html, bm) {
             foot += '<!-- benchmark ' + bm + ' -->';
             if (err !== null) {
                 res.writeHead(err.statusCode, { 'Content-Type': 'text/html' });
                 res.end('GitMD couldn\'t find: ' + err.url + '\n');
             }
             res.writeHead(200, { 'Content-Type': 'text/html' });
-            res.end(head+mdown+foot+'\n');
+            res.end(head+html+foot+'\n');
         });
     }).listen(8000);
     console.log('starting on 8000');
